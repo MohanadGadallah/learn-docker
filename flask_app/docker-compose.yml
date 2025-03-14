@@ -9,10 +9,10 @@ services:
     # Mapping of container port to host
     
     ports:
-      - "5000:5000"
+      - "4000:5000"
     # Mount volume 
     volumes:
-      - "/usercode/:/code"
+      - "/Users/mohanadgad/Desktop/learn-docker/flask_app/:/code"
 
     # Link database container to app container 
     # for reachability.
@@ -21,7 +21,7 @@ services:
     depends_on:
       - database
     
- database:
+  database:
 
     # image to fetch from docker hub
     image: mysql/mysql-server:5.7
@@ -39,5 +39,5 @@ services:
     # everything in docker-entrypoint-initdb.d folder
     # is executed as soon as container is up nd running.
     volumes:
-      - "/usercode/db/init.sql:/docker-entrypoint-initdb.d/init.sql"
+      - "/Users/mohanadgad/Desktop/learn-docker/flask_app/db/init.sql:/docker-entrypoint-initdb.d/init.sql"
     

@@ -156,15 +156,46 @@ To link two networks manually:
 docker run --link "mysql:backenddb" -p 5000:5000 flask_app:1.0
 ```
 
-
-
-
-add Docker-compose
- Compose is a tool for defining and running multi-container Docker applications.
-
- Docker-compose file
- Modify mounts according to your files system. For example,
-
-volumes:
- - "/usercode/:/code"
+## Docker Compose
+Docker Compose is a tool that combines and runs multiple containers of interrelated services with a single command. It defines all application dependencies in one place and allows Docker to manage them efficiently with:
+```sh
 docker-compose up --build
+```
+
+### Docker Compose File Explanation
+The Compose file is written in YAML format. Here’s an example:
+```yaml
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - "/usercode/:/code"
+    environment:
+      - APP_ENV=production
+  database:
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+```
+
+### Explanation:
+- **`version`**: Specifies the Compose file version. Version 3+ is recommended as it is backward compatible.
+- **`services`**: Defines all containers needed for the application.
+- **`web`**: The Flask app service.
+- **`build`**: Defines where to find the Dockerfile.
+- **`ports`**: Maps the container’s port to the host.
+- **`volumes`**: Mounts directories to avoid rebuilding images on file changes.
+- **`database`**: Defines a MySQL container.
+- **`environment`**: Sets environment variables inside the container.
+
+### Additional Docker Compose Concepts
+- **`links`**: Used to link services in a bridge network (deprecated, use networks instead).
+- **`image`**: Specifies a prebuilt image instead of building from a Dockerfile.
+- **`deploy`**: Allows scaling multiple containers of the same service in production.
+
+For more details, refer to the official Docker Compose reference:
+[Docker Compose Reference](https://docs.docker.com/reference/compose-file/)
+
