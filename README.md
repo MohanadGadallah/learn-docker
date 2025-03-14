@@ -12,7 +12,7 @@ Example:
 docker build -t flask_app:1.0 .
 ```
 
-## Setting Environment Variables in Docker Build
+## Setting Environment Variables in Docker
 To set environment variables in a `Dockerfile`, use the `ENV` instruction:
 ```dockerfile
 ENV APP_ENV=production
@@ -26,6 +26,10 @@ To use `ARG` in a `Dockerfile`:
 ```dockerfile
 ARG APP_ENV=development
 ENV APP_ENV=$APP_ENV
+```
+To pass environment variables at runtime, use `-e`:
+```sh
+docker run -e APP_ENV=production -e DEBUG=False flask_app:1.0
 ```
 
 ## Creating and Managing Docker Volumes
@@ -82,72 +86,7 @@ To watch real-time logs:
 docker logs -f <container_id>
 ```
 
-## Attaching to a Running Container
-To attach to a running container:
-```sh
-docker attach <container_id>
-```
-⚠ **Warning:** Attaching to a container means sharing its standard input/output. If you press `Ctrl+C`, it will stop the container. To safely detach without stopping it, use `Ctrl+P + Ctrl+Q`.
-
-## Troubleshooting
-For diagnosing issues using the terminal or Docker Desktop, refer to:
-[Docker Troubleshooting Guide](https://docs.docker.com/desktop/troubleshoot-and-support/troubleshoot/)
-
-## Managing Docker Space
-To check how much space Docker is using:
-```sh
-docker system df
-```
-To remove all unused data:
-```sh
-docker system prune
-```
-To clean specific elements:
-```sh
-docker container prune  # Remove stopped containers
-docker image prune      # Remove unused images
-docker network prune    # Remove unused networks
-```
-
-## Inspecting Containers
-To inspect a container, image, or network:
-```sh
-docker inspect <container_id | image_id | network_id>
-```
-
-## Working with Docker Hub
-### Pushing an Image to Docker Hub
-1. Log in to Docker Hub:
-   ```sh
-   docker login
-   ```
-   Enter your Docker Hub credentials.
-
-2. Push an image:
-   ```sh
-   docker push <username>/flask_app:1.0
-   ```
-
-### Pulling an Image from Docker Hub
-To download an image from Docker Hub:
-```sh
-docker pull <username>/flask_app:1.0
-```
-
----
-
-This `README.md` will be updated as I progress in learning Docker. 🚀
-
-## Docker Networks
-### Network Terminologies and Commands
-Some key network terminologies:
-- **Hostname:** The name of a machine used to identify it in a network.
-- **Ping:** Use `ping <hostname>/<ip>` to check machine connectivity.
-- **Subnet:** A smaller, isolated part of a network, creating boundaries within the same network.
-- **DNS:** A directory that maps reachable hosts using IP and hostname, allowing access by either.
-- **/etc/hosts:** A file containing all reachable hosts with their IP addresses.
-
-### Docker Communication
+## Docker Communication
 ![Docker Communication](./docker_communication.png)
 
 ### Linking Two Networks Without Docker Compose
@@ -227,4 +166,41 @@ Every command starts with `docker-compose`. Use `docker-compose --help` to see a
   This command is similar to `docker logs <container ID>`. The difference is that it prints logs from all services. Use `-f` to see real-time logs.
 
 For more details, refer to the official documentation: [Docker Compose CLI Reference](https://docs.docker.com/reference/cli/docker/compose/)
+
+## Docker Compose File Structure
+A basic `docker-compose.yml` file example:
+```yaml
+version: '3.8'
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    networks:
+      - app_network
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydb
+    networks:
+      - app_network
+networks:
+  app_network:
+    driver: bridge
+```
+
+### Explanation of `docker-compose.yml`:
+- **version:** Defines the version of the Docker Compose file syntax.
+- **services:** Lists the application components (web and db in this case).
+- **build:** Specifies the build context (directory containing the `Dockerfile`).
+- **image:** Defines a pre-built image to be used for a service.
+- **ports:** Maps container ports to the host machine (`5000:5000` means host port 5000 maps to container port 5000).
+- **depends_on:** Specifies service dependencies (web depends on db, ensuring db starts first).
+- **environment:** Sets environment variables required by the service.
+- **networks:** Configures container networking. The `app_network` ensures both services can communicate.
+- **driver:** The `bridge` network driver is the default for container communication.
 
