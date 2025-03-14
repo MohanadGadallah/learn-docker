@@ -204,3 +204,32 @@ networks:
 - **networks:** Configures container networking. The `app_network` ensures both services can communicate.
 - **driver:** The `bridge` network driver is the default for container communication.
 
+
+# Multiple Dockerfiles in Docker-Compose
+
+There might be a situation where we need to have multiple Dockerfiles for different services.
+
+## Examples
+- Creating a microservices app
+- Dockerfile for different environments such as development, production
+
+In these cases, you have to tell docker-compose the Dockerfile it should consider for creating that specific service.
+
+## Specifying Dockerfile in Docker-Compose
+By default, docker-compose looks for a file named `Dockerfile`. Dockerfiles can have any name. It’s just a file without any extension. We can override the default behavior using the `dockerfile: 'custom-name'` directive inside the build section.
+
+### Parameters
+- **context**: Use this to specify the directory of the Dockerfile or an alternate Dockerfile relative to the `docker-compose.yml` file.
+- **dockerfile**: As mentioned above, specify the name of an alternate Dockerfile if it is not named `Dockerfile`.
+
+## Environment Variables with Docker-Compose
+### Using the `env_file`
+Another method is to use the `env_file` keyword instead of the `environment` keyword in `docker-compose.yml`. In this method, it is not necessary that the `.env` file should be located in the same directory as the `docker-compose` file.
+
+You will provide the location of the `.env` file like so:
+
+```yaml
+env_file:
+  - ./.env
+```
+
