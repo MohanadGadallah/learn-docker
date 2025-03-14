@@ -136,7 +136,7 @@ docker pull <username>/flask_app:1.0
 
 ---
 
-
+This `README.md` will be updated as I progress in learning Docker. 🚀
 
 ## Docker Networks
 ### Network Terminologies and Commands
@@ -150,6 +150,21 @@ Some key network terminologies:
 ### Docker Communication
 ![Docker Communication](./docker_communication.png)
 
+### Linking Two Networks Without Docker Compose
+To link two networks manually:
+```sh
+docker run --link "mysql:backenddb" -p 5000:5000 flask_app:1.0
+```
 
 
-This `README.md` will be updated as I progress in learning Docker. 🚀
+
+
+add Docker-compose
+ Compose is a tool for defining and running multi-container Docker applications.
+
+ Docker-compose file
+ Modify mounts according to your files system. For example,
+
+volumes:
+ - "/usercode/:/code"
+docker-compose up --build
