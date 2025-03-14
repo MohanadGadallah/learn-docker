@@ -132,6 +132,15 @@ docker pull <username>/flask_app:1.0
 
 This `README.md` will be updated as I progress in learning Docker. 🚀
 
-### Docker Networks
+## Docker Networks
+### Network Terminologies and Commands
+Some key network terminologies:
+- **Hostname:** The name of a machine used to identify it in a network.
+- **Ping:** Use `ping <hostname>/<ip>` to check machine connectivity.
+- **Subnet:** A smaller, isolated part of a network, creating boundaries within the same network.
+- **DNS:** A directory that maps reachable hosts using IP and hostname, allowing access by either.
+- **/etc/hosts:** A file containing all reachable hosts with their IP addresses.
 
+### Docker Communication
+![Docker Communication](./docker_communication.png)
 
