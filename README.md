@@ -130,7 +130,7 @@ docker pull <username>/flask_app:1.0
 
 ---
 
-This `README.md` will be updated as I progress in learning Docker. 🚀
+
 
 ## Docker Networks
 ### Network Terminologies and Commands
@@ -144,3 +144,7 @@ Some key network terminologies:
 ### Docker Communication
 ![Docker Communication](./docker_communication.png)
 
+
+
+
+This `README.md` will be updated as I progress in learning Docker. 🚀
