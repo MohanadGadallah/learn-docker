@@ -2,6 +2,50 @@
 
 This repository documents my learning journey with Docker, including commonly used commands for managing containers, data, logs, and troubleshooting.
 
+## Building a Docker Image
+To build a Docker image from a `Dockerfile`:
+```sh
+docker build -t <image_name>:<tag> .
+```
+Example:
+```sh
+docker build -t flask_app:1.0 .
+```
+
+## Setting Environment Variables in Docker Build
+To set environment variables in a `Dockerfile`, use the `ENV` instruction:
+```dockerfile
+ENV APP_ENV=production
+ENV DEBUG=False
+```
+Alternatively, you can pass environment variables at build time using `--build-arg`:
+```sh
+docker build --build-arg APP_ENV=production -t flask_app:1.0 .
+```
+To use `ARG` in a `Dockerfile`:
+```dockerfile
+ARG APP_ENV=development
+ENV APP_ENV=$APP_ENV
+```
+
+## Creating and Managing Docker Volumes
+To create a named volume:
+```sh
+docker volume create <volume_name>
+```
+To list all volumes:
+```sh
+docker volume ls
+```
+To inspect a volume:
+```sh
+docker volume inspect <volume_name>
+```
+To remove a volume:
+```sh
+docker volume rm <volume_name>
+```
+
 ## Managing Data for Containers
 To run a container with a volume mount and expose a port:
 ```sh
@@ -13,7 +57,6 @@ To get back into a running container:
 ```sh
 docker exec -it <container_id> bash
 ```
-
 If the container is running in daemon mode (background), list all running containers:
 ```sh
 docker ps
@@ -28,13 +71,17 @@ To save logs to a file:
 ```sh
 docker logs <container_id> > output.log
 ```
-
 To watch real-time logs:
 ```sh
 docker logs -f <container_id>
 ```
 
-⚠ **Warning:** Avoid using `docker attach <container_id>` unless necessary. Pressing `Ctrl+C` may stop the running application.
+## Attaching to a Running Container
+To attach to a running container:
+```sh
+docker attach <container_id>
+```
+⚠ **Warning:** Attaching to a container means sharing its standard input/output. If you press `Ctrl+C`, it will stop the container. To safely detach without stopping it, use `Ctrl+P + Ctrl+Q`.
 
 ## Troubleshooting
 For diagnosing issues using the terminal or Docker Desktop, refer to:
@@ -84,4 +131,7 @@ docker pull <username>/flask_app:1.0
 ---
 
 This `README.md` will be updated as I progress in learning Docker. 🚀
+
+### Docker Networks
+
 
