@@ -62,6 +62,12 @@ If the container is running in daemon mode (background), list all running contai
 docker ps
 ```
 
+## Stopping a Running Container
+To stop a running container:
+```sh
+docker stop <container_id>
+```
+
 ## Accessing Docker Logs
 To view logs of a specific container:
 ```sh
@@ -145,18 +151,5 @@ Some key network terminologies:
 ![Docker Communication](./docker_communication.png)
 
 
-Docker network types#
-
-By default, Docker creates three networks.
-
-Run the docker network ls command like so:
-
-The none and host networks cannot be removed, they’re part of the network stack in Docker, but not useful to network administrators since they have no external interfaces to configure.
-
-Admins can configure the bridge network, also known as the Docker0 network. This network automatically creates an IP subnet and gateway.
-
-All containers that belong to this network are part of the same subnet, so communication between containers in this network can occur via IP addressing.
-
-A drawback of the default bridge network is that automatic service discovery of containers using DNS is not supported. Therefore, if you want containers that belong to the default network to be able to talk to each other, you must use the --link option to statically allow communications to occur. Additionally, communication requires port forwarding between containers.
 
 This `README.md` will be updated as I progress in learning Docker. 🚀
