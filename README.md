@@ -162,40 +162,69 @@ Docker Compose is a tool that combines and runs multiple containers of interrela
 docker-compose up --build
 ```
 
-### Docker Compose File Explanation
-The Compose file is written in YAML format. Here’s an example:
-```yaml
-version: '3'
-services:
-  web:
-    build: .
-    ports:
-      - "5000:5000"
-    volumes:
-      - "/usercode/:/code"
-    environment:
-      - APP_ENV=production
-  database:
-    image: mysql:latest
-    environment:
-      - MYSQL_ROOT_PASSWORD=root
-```
+### Docker Compose Commands
+Every command starts with `docker-compose`. Use `docker-compose --help` to see available commands.
 
-### Explanation:
-- **`version`**: Specifies the Compose file version. Version 3+ is recommended as it is backward compatible.
-- **`services`**: Defines all containers needed for the application.
-- **`web`**: The Flask app service.
-- **`build`**: Defines where to find the Dockerfile.
-- **`ports`**: Maps the container’s port to the host.
-- **`volumes`**: Mounts directories to avoid rebuilding images on file changes.
-- **`database`**: Defines a MySQL container.
-- **`environment`**: Sets environment variables inside the container.
+- **Build images:**
+  ```sh
+  docker-compose build
+  ```
+  The job of the `build` command is to get the images ready to create containers. If a service is using a prebuilt image, it will skip that service.
 
-### Additional Docker Compose Concepts
-- **`links`**: Used to link services in a bridge network (deprecated, use networks instead).
-- **`image`**: Specifies a prebuilt image instead of building from a Dockerfile.
-- **`deploy`**: Allows scaling multiple containers of the same service in production.
+- **List built images:**
+  ```sh
+  docker-compose images
+  ```
+  This command lists images built using the current `docker-compose` file.
 
-For more details, refer to the official Docker Compose reference:
-[Docker Compose Reference](https://docs.docker.com/reference/compose-file/)
+- **Run a service:**
+  ```sh
+  docker-compose run web
+  ```
+  Similar to `docker run`, this creates containers from images built for services mentioned in the compose file.
+
+- **Start containers (build if necessary):**
+  ```sh
+  docker-compose up
+  ```
+  If images are already built, it will fork the container directly. Add `--build` to force a rebuild.
+
+- **Stop running containers:**
+  ```sh
+  docker-compose stop
+  ```
+
+- **Remove containers:**
+  ```sh
+  docker-compose rm
+  ```
+
+- **Start stopped containers:**
+  ```sh
+  docker-compose start
+  ```
+
+- **Restart containers:**
+  ```sh
+  docker-compose restart
+  ```
+
+- **List all service containers:**
+  ```sh
+  docker-compose ps
+  ```
+
+- **Stop and remove all services:**
+  ```sh
+  docker-compose down
+  ```
+  This command stops all services and cleans up containers, networks, and images used by the compose file.
+
+- **View logs:**
+  ```sh
+  docker-compose logs
+  ```
+  This command is similar to `docker logs <container ID>`. The difference is that it prints logs from all services. Use `-f` to see real-time logs.
+
+For more details, refer to the official documentation: [Docker Compose CLI Reference](https://docs.docker.com/reference/cli/docker/compose/)
 
