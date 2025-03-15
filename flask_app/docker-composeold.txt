@@ -1,0 +1,45 @@
+version: '3'
+services:
+  web:
+    # Path to dockerfile.
+    # '.' represents the current directory in which
+    # docker-compose.yml is present.
+    build: .
+
+    # Mapping of container port to host
+    
+    ports:
+      - "4000:5000"
+    # Mount volume 
+    volumes:
+      - "/Users/mohanadgad/Desktop/learn-docker/flask_app/:/code"
+
+    # Link database container to app container 
+    # for reachability.
+    links:
+      - "database:backenddb"
+    depends_on:
+      - database
+    
+  database:
+
+    # image to fetch from docker hub
+    build:
+      context: ./db
+      dockerfile: Dockerfile-db
+
+    # Environment variables for startup script
+    # container will use these variables
+    # to start the container with these defined variables. 
+    environment:
+      - "MYSQL_ROOT_PASSWORD=root"
+      - "MYSQL_USER=testuser"
+      - "MYSQL_PASSWORD=admin123"
+      - "MYSQL_DATABASE=backend"
+    # Mount init.sql file to automatically run 
+    # and create tables for us.
+    # everything in docker-entrypoint-initdb.d folder
+    # is executed as soon as container is up nd running.
+    volumes:
+      - "/Users/mohanadgad/Desktop/learn-docker/flask_app/db/init.sql:/docker-entrypoint-initdb.d/init.sql"
+    
