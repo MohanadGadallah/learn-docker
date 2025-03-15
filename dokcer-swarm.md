@@ -18,7 +18,7 @@ Managing this cluster of containers effectively is called container orchestratio
 Docker Swarm is a container orchestration tool that allows a user to manage multiple containers deployed across multiple host machines. Docker Swarm has different components that help it manage the cluster effectively.
 
 ### Docker Swarm Architecture
-
+![Docker Swarm Architecture](./Docker_swarm_architecture.png)
 A **worker node** is something on which tasks are created by the manager. It will have services running on it to maintain the state defined in the YAML file.
 
 In this architecture, there is only one YAML file. That’s the power of the YAML file. A stack of services is created and deployed on each worker node using the YAML file.
