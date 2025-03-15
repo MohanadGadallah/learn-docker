@@ -36,3 +36,37 @@ $ docker compose top
 
 The PID numbers returned are the PID numbers as seen from the Docker host (not from within the containers).
 
+### The `docker compose stop` Command
+
+Run the following command to stop the app:
+```sh
+$ docker compose stop
+```
+
+You’re about to stop and restart the app.
+
+### The `docker compose restart` Command
+
+Restart the app with the `docker compose restart` command:
+```sh
+$ docker compose restart
+```
+
+### Verify the Operation Worked
+
+Run the following command to verify the operation:
+```sh
+$ docker compose ls
+```
+
+### Clean Up
+
+Learn how to stop and delete a Compose application using the `docker compose down` command.
+
+Run the following command to stop and delete the app. The `--volumes` flag will delete all of the app’s volumes, and the `--rmi all` will delete all of its images.
+```sh
+$ docker-compose down --volumes --rmi all
+```
+
+Use `docker volume ls` and `docker-compose ps -a` to verify whether the resources have been removed or not.
+
