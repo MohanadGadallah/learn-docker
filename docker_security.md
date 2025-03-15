@@ -135,3 +135,4 @@ docker run --mount source=volume-name,destination=/path/in/container,readonly py
 
 The best practices are implemented by organizations as a part of their standard development process and developers need to follow the rules. Using these practices as an independent developer will also improve the code quality. 
 
+People use very complex Nginx configuration to secure a server from different attacks and there is a tool for generating these config files for a production system. Certbot is one of them.
