@@ -55,4 +55,3 @@ There are two main types of data: **persistent** and **non-persistent**.
 - **Docker volumes** are first-class objects in the Docker API, and you manage them independently of containers using their own `docker volume` sub-command. This means deleting containers doesn’t delete the data in their volumes.
 - A few third-party plugins exist that provide Docker with access to specialized external storage systems.
 - **Volumes** are the recommended way to work with persistent data in Docker environments.
-
