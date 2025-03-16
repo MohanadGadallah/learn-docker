@@ -75,3 +75,25 @@ Docker leverages capabilities so that you can run containers as root but strip o
 
 This is a good example of implementing the principle of least privilege as you end up with a container that only has the capabilities it needs. Docker also sets restrictions to prevent containers from re-adding dropped capabilities. Docker ships with sensible out-of-the-box capabilities, but you should configure your own for your production apps and containers. However, configuring your own requires extensive effort and testing.
 
+# Docker Scout and Vulnerability Scanning
+
+Learn about image scanning, a crucial security practice that analyzes container images for vulnerabilities, ensuring the security of your containerized applications.
+
+Every container runs multiple software packages that are susceptible to bugs and vulnerabilities that malicious actors can exploit.
+
+# Signing and Verifying Images with Docker Content Trust
+
+Let's see how Docker Content Trust makes it smooth to verify the integrity and the publisher of Docker images.
+
+## Ensuring Image Integrity with DCT
+
+Docker Content Trust (DCT) makes it simple for you to verify the integrity and publisher of images and is especially important when you're pulling images over untrusted networks such as the internet. At a high level, DCT lets you sign your images when you push them to registries like Docker Hub. It also lets you verify the images you pull and run as containers.
+
+You can also use DCT to provide context, such as whether or not a developer has signed an image for use in a particular environment, such as prod or dev, or whether an image has been superseded by a newer version and is, therefore, stale.
+
+## Setting up Docker Content Trust
+
+The following steps walk you through configuring Docker Content Trust, signing and pushing an image, and then pulling the signed image.
+
+If you plan on following along, you’ll need a cryptographic key pair. If you don’t already have one, you can run the following `docker trust` command to generate one. The command generates a new key pair called `nigel` and loads it to the local trust store ready for use. It will prompt you to enter a passphrase; don’t forget it.
+
