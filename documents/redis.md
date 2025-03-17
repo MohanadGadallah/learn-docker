@@ -404,3 +404,89 @@ We can insert `6` before `7` using `LINSERT`:
 Now the list will be:
 
     LRANGE numbers 0 -1  # Returns 1 2 3 4 5 6 7 8 9 10
+
+
+
+# Working with Sets in Redis
+
+## SADD command
+
+To add an element into a set in Redis, we use the `SADD` command.
+
+### Syntax:
+
+    SADD key value
+
+### Example:
+
+In the example below, we are adding the fruits to Redis.
+
+    SADD fruits "apple"
+    SADD fruits "banana"
+    SADD fruits "orange"
+
+Now we will try to add `apple` again to the set. We will receive `0` as the output of the `SADD` command, which means the fruit was not added.
+
+    SADD fruits "apple"  # Returns 0
+
+## SMEMBERS command
+
+To see all the elements in a set, we can use the `SMEMBERS` command.
+
+### Syntax:
+
+    SMEMBERS key
+
+### Example:
+
+To retrieve all the elements in the `fruits` set:
+
+    SMEMBERS fruits  # Returns "apple", "banana", "orange"
+
+## SISMEMBER command
+
+To check if an element is present in a set, we can use the `SISMEMBER` command. If the element is present in the set, then `1` will be returned. Otherwise, `0` will be returned.
+
+### Syntax:
+
+    SISMEMBER key value
+
+### Example:
+
+To check if `banana` is in the `fruits` set:
+
+    SISMEMBER fruits "banana"  # Returns 1
+
+To check if `grape` is in the `fruits` set:
+
+    SISMEMBER fruits "grape"  # Returns 0
+
+## SCARD command
+
+The `SCARD` command is used to find the count of members present in the set.
+
+### Syntax:
+
+    SCARD key
+
+### Example:
+
+To find the number of elements in the `fruits` set:
+
+    SCARD fruits  # Returns 3
+
+## SDIFF command
+
+The `SDIFF` command is used to find the difference between two sets.
+
+### Syntax:
+
+    SDIFF key1 key2
+
+### Example:
+
+Suppose we have two sets, `S1` and `S2`. The difference, `S1 - S2`, returns all elements that are present in `S1` but not in `S2`.
+
+    SADD set1 "apple" "banana" "cherry"
+    SADD set2 "banana" "cherry" "date"
+    SDIFF set1 set2  # Returns "apple"
