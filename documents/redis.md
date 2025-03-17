@@ -188,3 +188,38 @@ We can use this command if we need to decrement the value for a given key by 1. 
     GET oracle_stock  # Returns 99
 
 
+# DECRBY Command
+
+We can use this command if we need to decrement the value for a given key by a particular number. In the example below, we are decreasing the stock price of Oracle by 5.
+
+## Example:
+
+    SET oracle_stock 100
+    DECRBY oracle_stock 5
+    GET oracle_stock  # Returns 95
+
+
+
+
+# DEL Command
+
+We can use this command to delete a particular key or multiple keys from Redis. In the example below, we are deleting the Oracle key.
+
+## Example:
+
+    SET oracle_stock 100
+    DEL oracle_stock
+    GET oracle_stock  # Returns (nil)
+
+
+# FLUSHALL Command
+
+We can flush all the keys present in Redis using this command, as shown below.
+
+## Example:
+
+    SET key1 value1
+    SET key2 value2
+    FLUSHALL
+    GET key1  # Returns (nil)
+    GET key2  # Returns (nil)
