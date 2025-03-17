@@ -491,28 +491,33 @@ Suppose we have two sets, `S1` and `S2`. The difference, `S1 - S2`, returns all 
     SADD set2 "banana" "cherry" "date"
     SDIFF set1 set2  # Returns "apple"
 
-
-SUNION command
+# SUNION command
 
 As the name suggests, the SUNION command is used to find the union of two or more sets.
 
-    SUNION key1 key2 key3
+```
+SUNION key1 key2 key3
+```
 
-SREM command
+# SREM command
 
 If we need to remove some elements from the set, then we can use SREM command.
 
-    SREM key value1 value2 …
+```
+SREM key value1 value2 …
+```
 
 In the example below, we are removing apple from our fruits set. When the command is executed, 1 is returned, which indicates that one fruit was removed.
 
-SPOP command
+# SPOP command
 
 This command is used to remove a random value from the set. We can remove one or more random values.
 
-    SPOP key count
+```
+SPOP key count
+```
 
-SMOVE command
+# SMOVE command
 
 The SMOVE command is used to move a value from one set to another.
 
@@ -520,63 +525,109 @@ Currently, we have two sets, i.e., fruits and fruits1. The elements in each of t
 
 We will move the fruit from one set to another using the SMOVE command.
 
-    SMOVE source dest member
+```
+SMOVE source dest member
+```
 
-
-
-ZADD command#
+# ZADD command
 
 This command is used to add elements to the sorted set in the Redis database. Here is the syntax of this command:
 
-    ZADD key score value …
+```
+ZADD key score value …
+```
 
 The same element cannot be inserted twice in a sorted set as all the elements are unique. But it is possible to add multiple different elements having the same score. When multiple elements have the same score, they are ordered lexicographically.
 
-ZRANGE command
+# ZRANGE command
 
 This command is for fetching all the elements for a particular key. If we need to fetch all the elements in the sorted set, we can provide -1 in the end field as shown below.
 
-    ZRANGE key start end
+```
+ZRANGE key start end
+```
 
-ZRANGEBYSCORE command
+# ZRANGEBYSCORE command
 
 This command is for fetching the elements in a particular range of scores.
 
-    ZRANGEBYSCORE key start end
+```
+ZRANGEBYSCORE key start end
+```
 
-ZCARD command
+# ZCARD command
 
 To get the number of elements in the sorted set, ZCARD is used. The syntax of this command is:
 
-    ZCARD key
+```
+ZCARD key
+```
 
-ZCOUNT command
+# ZCOUNT command
 
 This command is used to find the number of elements within a certain range of scores. Let’s say we need to find all the countries where the freedom of speech index is less than 100.
 
-    ZCOUNT key min max
+```
+ZCOUNT key min max
+```
 
-
-ZREM command
+# ZREM command
 
 The ZREM command is used to remove a member from the sorted set. The syntax of this command is:
 
-    ZREM key value
+```
+ZREM key value
+```
 
-ZRANK command
+# ZRANK command
 
 The ZRANK command is used to find the index of an element in the sorted set. If the rank of an element is 0, then its score is the lowest. The syntax of this command is:
 
-    ZRANK key member
+```
+ZRANK key member
+```
 
-ZREVRANK command
+# ZREVRANK command
 
 The ZREVRANK command is used to find the rank from the reverse. If the rank of an element is 0, then the score is the highest. The syntax of this command is:
 
-    ZREVRANK key member
+```
+ZREVRANK key member
+```
 
-ZSCORE command
+# ZSCORE command
 
 To get the score of an element, use the ZSCORE command. The syntax of this command is:
 
-    ZSCORE key member
+```
+ZSCORE key member
+```
+
+# Storing Hashes in Redis
+
+Let’s look at the commands used to store hashes in Redis.
+
+We know that the data in Redis is stored as key-value pairs. The value can also be a field-value pair. This is called the Hash data structure. Suppose we need to store the employee ID and name of all the employees within a department. In this case, we can use Hashes in Redis. The key will be the department name, and the value will be the empId-empName pair.
+
+# HMSET command
+
+The HMSET command is used to store a hash in Redis. The syntax of this command is:
+
+```
+HMSET key field value
+```
+
+# HGETALL command
+
+This command is used to get all the field value pairs for a given key. The syntax of this command is:
+
+```
+hgetall key
+```
+
+# HGET command
+
+We can use this command if we need to find the value of a particular field within a key. This is useful if the hash contains a lot of field-value pairs, and we don’t need them all. The syntax of this command is:
+
+```
+HGET key field
