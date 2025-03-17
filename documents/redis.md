@@ -315,3 +315,92 @@ The `RPOP` command is used to remove the element from the tail of the list.
 
     RPOP cars  # Removes "Mercedes"
     LRANGE cars 0 -1  # Returns ["BMW", "Ford", "Toyota", "Honda"]
+
+
+
+# Modifying Lists in Redis
+
+We will look at how we can modify a List present in the database.
+
+## LLEN command
+
+The `LLEN` command is used to find the length of the list, as shown below.
+
+### Syntax:
+
+    LLEN key
+
+### Example:
+
+In the example below, we are finding the length of the list stored in the Redis database.
+
+    RPUSH cars "Toyota"
+    RPUSH cars "Ford"
+    RPUSH cars "BMW"
+    RPUSH cars "Tesla"
+    
+    LLEN cars  # Returns 4
+
+## LINDEX command
+
+The `LINDEX` command is used to find the element at a particular index in the list.
+
+### Syntax:
+
+    LINDEX key index
+
+### Example:
+
+In the example below, we are retrieving the element at index `2` from the list stored in the Redis database.
+
+    LINDEX cars 2  # Returns "BMW"
+
+## LSET command
+
+The `LSET` command is used to update the value at a given index.
+
+### Syntax:
+
+    LSET key index value
+
+### Example:
+
+In the example below, we have `BMW` at index `0`. We will change it to `Mercedes` using the `LSET` command.
+
+    LSET cars 0 "Mercedes"
+
+## LPUSHX command
+
+The `LPUSHX` command adds an element to the head of the list if the list exists.
+
+### Syntax:
+
+    LPUSHX key value
+
+### Example:
+
+If the key `cars` exists, we add `Honda` to the head of the list.
+
+    LPUSHX cars "Honda"
+
+## LINSERT command
+
+The `LINSERT` command is useful if we need to insert an element before a particular element in a list.
+
+### Syntax:
+
+    LINSERT key BEFORE|AFTER pivot value
+
+### Example:
+
+Let’s say we need to add the first ten natural numbers in a list. We added them but forgot to add number `6`, as shown below:
+
+    RPUSH numbers 1 2 3 4 5 7 8 9 10
+    
+We can insert `6` before `7` using `LINSERT`:
+
+    LINSERT numbers BEFORE 7 6
+    
+Now the list will be:
+
+    LRANGE numbers 0 -1  # Returns 1 2 3 4 5 6 7 8 9 10
