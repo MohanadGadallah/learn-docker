@@ -631,3 +631,52 @@ We can use this command if we need to find the value of a particular field withi
 
 ```
 HGET key field
+
+
+```
+
+# HEXISTS command
+
+This command is used to check if a particular field exists in the database or not. The syntax for this is:
+
+```
+HEXISTS key field
+```
+
+### Example:
+```
+HMSET user:1001 name "John Doe" age 30
+HEXISTS user:1001 name  # Returns 1
+HEXISTS user:1001 email # Returns 0
+```
+
+# HDEL command
+
+This command is used to delete a field from the hash. The syntax of this command is:
+
+```
+HDEL key field
+```
+
+### Example:
+```
+HMSET user:1002 name "Jane Doe" age 25
+HDEL user:1002 age  # Removes the 'age' field
+HGETALL user:1002   # Returns {"name": "Jane Doe"}
+```
+
+# HSETNX command
+
+Suppose we already have some fields in our hash, and we use the HSET command, which updates the value. We can use the HSETNX command to fix this. This command will insert the field if it is not present. Otherwise, it will do nothing. The syntax of this command is:
+
+```
+HSETNX key field value
+```
+
+### Example:
+```
+HMSET user:1003 name "Alice" age 28
+HSETNX user:1003 age 35  # Won't update 'age' since it already exists
+HSETNX user:1003 city "New York"  # Adds 'city' field since it doesn't exist
+HGETALL user:1003  # Returns {"name": "Alice", "age": "28", "city": "New York"}
+```
