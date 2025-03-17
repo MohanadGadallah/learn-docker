@@ -98,3 +98,93 @@ In the example below, we are storing the stock price for **Microsoft**. We are p
 SETEX mohanad 40 500
 ```
 
+# Using EX with SET Command
+
+Instead of using the **SETEX** command, we can also use the **SET** command with the **EX** option as shown below.
+
+```
+SET mohanad 400 EX 30
+```
+
+# PSETEX Command
+
+This command is similar to **SETEX** command. The only difference is that the time provided is in **milliseconds**.
+
+```
+PSETEX mohanad 30000 500
+```
+
+# Using PX with SET Command
+
+Instead of using the **PSETEX** command, we can also use the **SET** command with the **PX** option as shown below.
+
+# SETNX Command
+
+The **SETNX** command is used if a key is already present. If a key is already present and we run **SET** again, then the value is updated. If we need to avoid this, we can use **SETNX**.
+
+# STRLEN Command
+
+This command is used if we need to find the length of the value for a particular key. The syntax of this command is:
+
+```
+STRLEN apple
+```
+
+# Redis Commands: MSET and MGET
+
+## MSET command
+
+If we need to save multiple records in a single command, we can use the MSET command. In the example below, we are setting the stock prices of multiple companies in a single command. The syntax of this command is:
+
+    MSET key1 value1 key2 value2
+
+## MGET command
+
+If we need to get the value of multiple keys in a single command, we can use the MGET command. In the example below, we are getting the stock prices of multiple companies in a single command.
+
+    MGET key1 key2
+
+
+## KEYS command
+
+If we need to find out what keys are stored in Redis, we can use the KEYS command, as shown below. This command will return all the keys saved in the database. The syntax of this command is:
+
+    KEYS *
+
+
+# INCR Command
+
+We can use this command if we need to increment the value of a given key by 1. In the example below, we are increasing the stock price of Oracle by 1. The syntax of this command is:
+
+    INCR key
+
+
+# INCRBY Command
+
+We can use this command if we need to increment the value for a given key by a particular number. In the example below, we are increasing the stock price of Oracle by 5. The syntax of this command is:
+
+    INCRBY key count
+
+If the value is not an integer, then either the ERR value is not an integer or out of range error is thrown. If we try to increment a key that does not exist, then a new key with value 1, is created. Similarly, if we try to decrement a key that does not exist then a new key, with value -1, is created.
+
+
+# INCRBYFLOAT Command
+
+This command is used if we need to increment the value of a key by a floating point number. In the example below, we are incrementing the stock price of Oracle by 3.5. The syntax of this command is:
+
+    INCRBYFLOAT key floatValue
+
+
+
+
+# DECR Command
+
+We can use this command if we need to decrement the value for a given key by 1. In the example below, we are decreasing the stock price of Oracle by 1.
+
+## Example:
+
+    SET oracle_stock 100
+    DECR oracle_stock
+    GET oracle_stock  # Returns 99
+
+
