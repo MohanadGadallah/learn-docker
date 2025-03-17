@@ -555,3 +555,28 @@ ZCOUNT command
 This command is used to find the number of elements within a certain range of scores. Let’s say we need to find all the countries where the freedom of speech index is less than 100.
 
     ZCOUNT key min max
+
+
+ZREM command
+
+The ZREM command is used to remove a member from the sorted set. The syntax of this command is:
+
+    ZREM key value
+
+ZRANK command
+
+The ZRANK command is used to find the index of an element in the sorted set. If the rank of an element is 0, then its score is the lowest. The syntax of this command is:
+
+    ZRANK key member
+
+ZREVRANK command
+
+The ZREVRANK command is used to find the rank from the reverse. If the rank of an element is 0, then the score is the highest. The syntax of this command is:
+
+    ZREVRANK key member
+
+ZSCORE command
+
+To get the score of an element, use the ZSCORE command. The syntax of this command is:
+
+    ZSCORE key member
