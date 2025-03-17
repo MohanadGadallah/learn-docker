@@ -680,3 +680,67 @@ HSETNX user:1003 age 35  # Won't update 'age' since it already exists
 HSETNX user:1003 city "New York"  # Adds 'city' field since it doesn't exist
 HGETALL user:1003  # Returns {"name": "Alice", "age": "28", "city": "New York"}
 ```
+# Subscribing to a channel
+
+A user can subscribe to a channel using the `SUBSCRIBE` command. This command takes the name of the channel as an argument. The syntax of this command is:
+
+```
+SUBSCRIBE channel
+```
+
+### Example:
+```
+SUBSCRIBE news_channel
+```
+
+# Publishing to a channel
+
+A user can publish to a channel using the `PUBLISH` command. The syntax of this command is:
+
+```
+PUBLISH channel message
+```
+
+### Example:
+```
+PUBLISH news_channel "Breaking News: Market hits all-time high!"
+```
+
+# Unsubscribing from a channel
+
+A client can easily unsubscribe from a channel using the `UNSUBSCRIBE` command. The syntax of this command is:
+
+```
+UNSUBSCRIBE channel
+```
+
+### Example:
+```
+UNSUBSCRIBE news_channel
+```
+
+# Subscribing to a group of channels
+
+If a client wants to subscribe to all the channels starting with a particular character or string, they can use the `PSUBSCRIBE` command. The syntax of this command is:
+
+```
+PSUBSCRIBE string*
+```
+
+### Example:
+```
+PSUBSCRIBE news_*
+```
+
+# Unsubscribing from a group of channels
+
+A client can unsubscribe from a group of channels using the `PUNSUBSCRIBE` command. The syntax of this command is:
+
+```
+PUNSUBSCRIBE pattern
+```
+
+### Example:
+```
+PUNSUBSCRIBE news_*
+```
