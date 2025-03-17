@@ -744,3 +744,19 @@ PUNSUBSCRIBE pattern
 ```
 PUNSUBSCRIBE news_*
 ```
+
+
+# Redis Security
+
+## Overview
+Learn how a Redis instance can be secured from attackers.
+
+## Importance of Security
+It is important that the Redis database is secured so that any unwanted user is unable to access the data. Security is also required to restrict an attacker from executing a command, like FLUSHALL, which can delete the entire data.
+
+## Redis Security Mechanisms
+Redis supports a very basic security system to protect the connection between the client and the server via a plain-text password. To secure Redis, the password should be set in the config file.
+
+### Limitations
+> Redis only supports basic security mechanisms. Anyone who knows the password can access the data in Redis. It is not possible to have users with different permission levels in Redis.
+
