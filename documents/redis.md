@@ -490,3 +490,34 @@ Suppose we have two sets, `S1` and `S2`. The difference, `S1 - S2`, returns all 
     SADD set1 "apple" "banana" "cherry"
     SADD set2 "banana" "cherry" "date"
     SDIFF set1 set2  # Returns "apple"
+
+
+SUNION command
+
+As the name suggests, the SUNION command is used to find the union of two or more sets.
+
+    SUNION key1 key2 key3
+
+SREM command
+
+If we need to remove some elements from the set, then we can use SREM command.
+
+    SREM key value1 value2 …
+
+In the example below, we are removing apple from our fruits set. When the command is executed, 1 is returned, which indicates that one fruit was removed.
+
+SPOP command
+
+This command is used to remove a random value from the set. We can remove one or more random values.
+
+    SPOP key count
+
+SMOVE command
+
+The SMOVE command is used to move a value from one set to another.
+
+Currently, we have two sets, i.e., fruits and fruits1. The elements in each of these sets are shown below.
+
+We will move the fruit from one set to another using the SMOVE command.
+
+    SMOVE source dest member
