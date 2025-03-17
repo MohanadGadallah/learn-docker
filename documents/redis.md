@@ -223,3 +223,14 @@ We can flush all the keys present in Redis using this command, as shown below.
     FLUSHALL
     GET key1  # Returns (nil)
     GET key2  # Returns (nil)
+
+
+# APPEND Command
+
+If we need to append some string to a value, we can use the APPEND command. In the example below, we created a key for which the value is "hello". We used APPEND to append "world" to the value.
+
+## Example:
+
+    SET greeting "hello"
+    APPEND greeting " world"
+    GET greeting  # Returns "hello world"
