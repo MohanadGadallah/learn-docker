@@ -521,3 +521,37 @@ Currently, we have two sets, i.e., fruits and fruits1. The elements in each of t
 We will move the fruit from one set to another using the SMOVE command.
 
     SMOVE source dest member
+
+
+
+ZADD command#
+
+This command is used to add elements to the sorted set in the Redis database. Here is the syntax of this command:
+
+    ZADD key score value …
+
+The same element cannot be inserted twice in a sorted set as all the elements are unique. But it is possible to add multiple different elements having the same score. When multiple elements have the same score, they are ordered lexicographically.
+
+ZRANGE command
+
+This command is for fetching all the elements for a particular key. If we need to fetch all the elements in the sorted set, we can provide -1 in the end field as shown below.
+
+    ZRANGE key start end
+
+ZRANGEBYSCORE command
+
+This command is for fetching the elements in a particular range of scores.
+
+    ZRANGEBYSCORE key start end
+
+ZCARD command
+
+To get the number of elements in the sorted set, ZCARD is used. The syntax of this command is:
+
+    ZCARD key
+
+ZCOUNT command
+
+This command is used to find the number of elements within a certain range of scores. Let’s say we need to find all the countries where the freedom of speech index is less than 100.
+
+    ZCOUNT key min max
