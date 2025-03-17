@@ -234,3 +234,84 @@ If we need to append some string to a value, we can use the APPEND command. In t
     SET greeting "hello"
     APPEND greeting " world"
     GET greeting  # Returns "hello world"
+
+
+# Storing Lists in Redis: Insertion Commands
+
+Let’s look at the commands used to insert Lists in the Redis database.
+
+As well as storing Strings in Redis, we can also store Lists. The Redis database internally stores Lists as a linked list. This linked list has a head and tail. Whenever we insert a new element, we can insert it either at the head or tail. The ‘head’ of the list is considered as the left-most element of the list, and the ‘tail’ is considered as the right-most element of the list.
+
+Let’s look at some of the commands that are used to handle Lists in the Redis database. We need to store a list of all the companies that build cars. We will store the list in a key called `cars`. If a new company arrives, then it is added to the list. If a company stops producing cars, then it is removed from the list. We are going to maintain this list in Redis.
+
+## LPUSH command
+
+The `LPUSH` command is used to insert a value at the head of the list. We can provide one or more values with this command. The syntax of this command is:
+
+    LPUSH key value...
+
+In the example below, we are inserting car manufacturers into the Redis database. The key is `cars`. We have inserted four manufacturers.
+
+## Example:
+
+    LPUSH cars "Toyota"
+    LPUSH cars "Ford"
+    LPUSH cars "BMW"
+    LPUSH cars "Tesla"
+    LRANGE cars 0 -1  # Returns ["Tesla", "BMW", "Ford", "Toyota"]
+
+Please note that the elements are inserted in reverse order. The reason for this is that each element is picked and inserted at the head.
+
+## LRANGE command
+
+The `LRANGE` command is used to see what elements are present for a given key. Suppose a key contains a List with a million records as its value. We might not want to see all the elements. We may only want to see the first three elements. The `LRANGE` command takes the start and end index as input, which is used to specify which elements from the list are displayed.
+
+    LRANGE key start end
+
+In the example below, we are displaying the first three elements from the list.
+
+## Example:
+
+    LRANGE cars 0 2  # Returns ["Tesla", "BMW", "Ford"]
+
+If we are not aware of the elements count, then we can provide `-1` in the end index. The following command will show all the elements in the list:
+
+    LRANGE cars 0 -1
+
+## LPOP command
+
+The `LPOP` command is used to remove an element from the list. This command removes the element at the head, i.e., the left of the list.
+
+    LPOP key
+
+In the example below, when we run `LPOP`, then Tesla will be removed because it is at the head.
+
+## Example:
+
+    LPOP cars  # Removes "Tesla"
+    LRANGE cars 0 -1  # Returns ["BMW", "Ford", "Toyota"]
+
+## RPUSH command
+
+The `RPUSH` command is used to insert a value at the tail of the list. The syntax of this command is below. We can provide one or more values with this command.
+
+    RPUSH key value...
+
+In the example below, we are inserting the car manufacturers into the Redis database. The key is `cars`. We have inserted four manufacturers.
+
+## Example:
+
+    RPUSH cars "Honda"
+    RPUSH cars "Mercedes"
+    LRANGE cars 0 -1  # Returns ["BMW", "Ford", "Toyota", "Honda", "Mercedes"]
+
+## RPOP command
+
+The `RPOP` command is used to remove the element from the tail of the list.
+
+    RPOP key
+
+## Example:
+
+    RPOP cars  # Removes "Mercedes"
+    LRANGE cars 0 -1  # Returns ["BMW", "Ford", "Toyota", "Honda"]
