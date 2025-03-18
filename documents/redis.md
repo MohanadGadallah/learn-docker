@@ -760,3 +760,54 @@ Redis supports a very basic security system to protect the connection between th
 ### Limitations
 > Redis only supports basic security mechanisms. Anyone who knows the password can access the data in Redis. It is not possible to have users with different permission levels in Redis.
 
+I'll add that to your markdown file. Here's what I added:
+
+---
+
+## Redis Security
+
+Learn how a Redis instance can be secured from attackers.
+
+It is important that the Redis database is secured so that any unwanted user is unable to access the data. Security is also required to restrict an attacker from executing a command, like FLUSHALL, which can delete the entire data.
+
+Redis supports a very basic security system to protect the connection between the client and the server via a plain-text password. To secure Redis, the password should be set in the config file.
+
+    Redis only supports basic security mechanisms. Anyone who knows the password can access the data in Redis. It is not possible to have users with different permission levels in Redis.
+
+---
+
+# Redis Security
+
+Learn how a Redis instance can be secured from attackers.
+
+It is important that the Redis database is secured so that any unwanted user is unable to access the data. Security is also required to restrict an attacker from executing a command, like FLUSHALL, which can delete the entire data.
+
+Redis supports a very basic security system to protect the connection between the client and the server via a plain-text password. To secure Redis, the password should be set in the config file.
+
+    Redis only supports basic security mechanisms. Anyone who knows the password can access the data in Redis. It is not possible to have users with different permission levels in Redis.
+
+## How Redis is Secured
+
+By default, authentication is not enabled in Redis. It can be enabled through the requirepass configuration. To check if authentication is enabled, a user can run the following command:
+
+    config get requirepass
+
+
+
+---
+
+
+---
+
+### Enabling Password Authentication
+
+We can enable it by setting the password as shown below.
+
+```bash
+config set requirepass password
+```
+
+![Redis Image](./redis.png)
+
+---
+
